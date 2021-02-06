@@ -3,6 +3,7 @@ import { readFromSheet, writeToSheet } from './sheet/sync';
 import { readLangDir } from './files/readLangDir';
 import { fromCombinedMessages, toCombinedMessages } from './files/combined';
 import { configFromFile, IConfig } from './config';
+import { writeLangDir } from './files/writeLangDir';
 
 async function loadConfig(opts: OptionValues) {
   const config = await configFromFile(opts.config);
@@ -13,6 +14,7 @@ async function loadConfig(opts: OptionValues) {
 async function pull(config: IConfig) {
   const messages = await readFromSheet(config);
   const languages = fromCombinedMessages(messages, 'default');
+  await writeLangDir(config.langDir, languages);
   console.log(languages);
 }
 
@@ -23,6 +25,8 @@ async function push(config: IConfig) {
 }
 
 async function main() {
+  program.name('i18n-sync');
+
   program.option(
     '-c, --config <path>',
     'path to config file',

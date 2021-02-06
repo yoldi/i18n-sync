@@ -36,11 +36,7 @@ describe('combined', () => {
     };
 
     const messages = toCombinedMessages(languages, 'default');
-    const restoredLanguages = fromCombinedMessages(
-      messages,
-      ['en-US', 'ru-RU'],
-      'default'
-    );
+    const restoredLanguages = fromCombinedMessages(messages, 'default');
 
     expect(restoredLanguages).toEqual(languages);
   });
