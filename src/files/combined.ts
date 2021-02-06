@@ -31,10 +31,13 @@ export const toCombinedMessages = (
 
 export const fromCombinedMessages = (
   messages: ICombinedMessage[],
-  locales: string[],
   defaultLocale: string
 ): ILanguages => {
   const languages: ILanguages = {};
+
+  const locales = Object.keys(messages[0]).filter(
+    it => !['id', 'description', 'defaultMessage', defaultLocale].includes(it)
+  );
 
   locales.forEach(locale => {
     languages[locale] = {};

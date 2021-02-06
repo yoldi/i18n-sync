@@ -1,0 +1,6 @@
+{
+  "langDir": "test/samples",
+  "tokenFile": ".credentials/keys.json",
+  "oauthFile": ".credentials/client_secret.json",
+  "sheetId": "1vtfYw-gRBM7WhisbtcgJg-T59T33T8tyvalYlknLJlY"
+}
