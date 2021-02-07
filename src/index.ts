@@ -46,7 +46,10 @@ async function main() {
   program
     .command('push')
     .description('Push i18n to Google Sheets')
-    .action(push);
+    .action(async () => {
+      const config = await loadConfig(program.opts());
+      await push(config);
+    });
 
   await program.parseAsync(process.argv);
 }
