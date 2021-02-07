@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { OptionValues, program } from 'commander';
 import { readFromSheet, writeToSheet } from './sheet/sync';
 import { readLangDir } from './files/readLangDir';
