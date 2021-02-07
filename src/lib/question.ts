@@ -1,4 +1,4 @@
-const rlp = require('readline');
+import rlp from 'readline';
 
 export function question(query: string): Promise<string> {
   const rl = rlp.createInterface({

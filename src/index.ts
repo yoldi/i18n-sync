@@ -21,7 +21,7 @@ async function pull(config: IConfig) {
 }
 
 async function push(config: IConfig) {
-  const languages = await readLangDir('./test/samples');
+  const languages = await readLangDir(config.langDir);
   const summary = await toCombinedMessages(languages, 'default');
   await writeToSheet(summary, config);
 }
