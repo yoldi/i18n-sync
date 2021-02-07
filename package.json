@@ -8,6 +8,9 @@
     "dist",
     "src"
   ],
+  "bin": {
+    "i18n-sync": "dist/index.js"
+  },
   "engines": {
     "node": ">=10"
   },
