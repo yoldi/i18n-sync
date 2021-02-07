@@ -17,13 +17,14 @@ async function pull(config: IConfig) {
   const messages = await readFromSheet(config);
   const languages = fromCombinedMessages(messages, 'default');
   await writeLangDir(config.langDir, languages);
-  console.log(languages);
+  console.log('Pull completed successfully.');
 }
 
 async function push(config: IConfig) {
   const languages = await readLangDir(config.langDir);
   const summary = await toCombinedMessages(languages, 'default');
   await writeToSheet(summary, config);
+  console.log('Push completed successfully.');
 }
 
 async function main() {
