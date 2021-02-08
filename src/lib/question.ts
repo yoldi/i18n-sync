@@ -1,9 +1,9 @@
-import rlp from 'readline';
+import rlp from "readline";
 
 export function question(query: string): Promise<string> {
   const rl = rlp.createInterface({
     input: process.stdin,
-    output: process.stdout,
+    output: process.stdout
   });
 
   return new Promise((resolve, reject) => {

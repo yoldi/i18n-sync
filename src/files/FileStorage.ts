@@ -42,7 +42,7 @@ export class FileStorage implements IStorage {
 
     data.locales.forEach(locale => {
       files[locale] = {};
-      Object.entries(data.messages[locale]).map(([id, message]) => {
+      Object.entries(data.messages[locale]).forEach(([id, message]) => {
         files[locale][id] = {
           defaultMessage: message,
           description: data.defaultMessages[id].description
