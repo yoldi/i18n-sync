@@ -23,7 +23,7 @@ export const toCombinedMessages = (
     ...locales
       .map(lang => ({
         key: lang,
-        value: languages[lang][id].defaultMessage,
+        value: languages[lang][id]?.defaultMessage,
       }))
       .reduce(toMap, {}),
   }));
