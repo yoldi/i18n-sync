@@ -1,12 +1,13 @@
 {
   "name": "@yoldi/i18n-sync",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "src/cli.ts"
   ],
   "bin": {
     "i18n-sync": "dist/index.js"
@@ -28,14 +29,8 @@
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "pretty-quick --staged"
     }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
   },
   "author": "Vladislav Romanov",
   "module": "dist/i18n-sync.esm.js",
@@ -54,6 +49,7 @@
     "@types/google-spreadsheet": "^3.0.2",
     "add-shebang": "^0.1.0",
     "husky": "^4.3.8",
+    "pretty-quick": "^3.1.0",
     "size-limit": "^4.9.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.1.0",

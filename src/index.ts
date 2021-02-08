@@ -1,53 +1,38 @@
-import { OptionValues, program } from 'commander';
-import { readFromSheet, writeToSheet } from './sheet/sync';
-import { readLangDir } from './files/readLangDir';
-import { fromCombinedMessages, toCombinedMessages } from './files/combined';
-import { configFromFile, IConfig } from './config';
-import { writeLangDir } from './files/writeLangDir';
-
-async function loadConfig(opts: OptionValues) {
-  const config = await configFromFile(opts.config);
-  return config;
-}
-
-// @ts-ignore
-async function pull(config: IConfig) {
-  const messages = await readFromSheet(config);
-  const languages = fromCombinedMessages(messages, 'default');
-  await writeLangDir(config.langDir, languages);
-  console.log('Pull completed successfully.');
-}
-
-async function push(config: IConfig) {
-  const languages = await readLangDir(config.langDir);
-  const summary = await toCombinedMessages(languages, 'default');
-  await writeToSheet(summary, config);
-  console.log('Push completed successfully.');
-}
+import { program } from "commander";
+import { ConfigMaker } from "./config/ConfigMaker";
+import { I18nSync } from "./i18nSync";
 
 async function main() {
-  program.name('i18n-sync');
+  program.name("i18n-sync");
 
-  program.option(
-    '-c, --config <path>',
-    'path to config file',
-    'i18n-sync.json'
-  );
+  program.option("-c, --config <path>", "path to config file", "i18n-sync.json");
+
+  const getConfig = async () => {
+    const configPath = program.opts().config;
+
+    const configMaker = new ConfigMaker();
+    await configMaker.loadFromFile(configPath);
+
+    return configMaker.getConfig();
+  };
 
   program
-    .command('pull')
-    .description('Fetch i18n from Google Sheets')
+    .command("pull")
+    .description("Fetch i18n from Google Sheets")
     .action(async () => {
-      const config = await loadConfig(program.opts());
-      await pull(config);
+      const config = await getConfig();
+      await new I18nSync(config).pull();
+
+      console.log("Pull completed successfully.");
     });
 
   program
-    .command('push')
-    .description('Push i18n to Google Sheets')
+    .command("push")
+    .description("Push i18n to Google Sheets")
     .action(async () => {
-      const config = await loadConfig(program.opts());
-      await push(config);
+      const config = await getConfig();
+      await new I18nSync(config).push();
+      console.log("Push completed successfully.");
     });
 
   await program.parseAsync(process.argv);
