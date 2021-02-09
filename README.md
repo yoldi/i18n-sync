@@ -4,7 +4,7 @@
 
 ## Установка
 
-`npm install i18n-sync`
+`npm install @yoldi/i18n-sync`
 
 ## Настройка
 
