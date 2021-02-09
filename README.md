@@ -72,4 +72,4 @@ Commands:
 
 `npx i18n-sync push` — отправить переводы в таблицу
 
-`npx i18n-sync push` — скачать переводы из таблицы
+`npx i18n-sync pull` — скачать переводы из таблицы
