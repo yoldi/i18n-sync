@@ -23,7 +23,9 @@ async function main() {
       const config = await getConfig();
       await new I18nSync(config).pull();
 
-      console.log("Pull completed successfully.");
+      console.log(
+        `Pull completed successfully.\nGoogle Sheets Link: https://docs.google.com/spreadsheets/d/${config.sheetId}`
+      );
     });
 
   program
@@ -32,7 +34,9 @@ async function main() {
     .action(async () => {
       const config = await getConfig();
       await new I18nSync(config).push();
-      console.log("Push completed successfully.");
+      console.log(
+        `Push completed successfully.\nGoogle Sheets Link: https://docs.google.com/spreadsheets/d/${config.sheetId}`
+      );
     });
 
   await program.parseAsync(process.argv);
